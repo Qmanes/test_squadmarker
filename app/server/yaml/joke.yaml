@@ -1,0 +1,930 @@
+swagger: '2.0'
+info:
+  version: '1.0'
+  title: Joke
+  contact: {}
+host: localhost
+basePath: /
+securityDefinitions: {}
+schemes:
+- http
+consumes:
+- application/json
+produces:
+- application/json
+paths:
+  /joke:
+    get:
+      summary: Seach Ramdon
+      tags:
+      - Misc
+      operationId: SeachRamdon
+      deprecated: false
+      produces:
+      - text/html; charset=utf-8
+      parameters:
+        - name: param
+          in: query
+          type: string
+          items:
+            type: string
+          description: 'Chuck or Dad'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/200ok'
+          examples:
+            text/html; charset=utf-8:
+              data: Chuck Norris doesn't give you the willies. He simply gives you The Willy.
+              status: 200
+              msg: joke search
+          headers:
+            Server:
+              type: string
+              default: Werkzeug/2.1.2 Python/3.10.5
+            Date:
+              type: string
+              default: Sun, 12 Jun 2022 20:35:15 GMT
+            Content-Length:
+              type: string
+              default: '122'
+            mimetype:
+              type: string
+              default: application/json
+            Connection:
+              type: string
+              default: close
+        '404':
+          description: NOT FOUND
+          schema:
+            $ref: '#/definitions/paramempty1'
+          examples:
+            text/html; charset=utf-8:
+              data: null
+              status: 404
+              msg: Param Not Found
+          headers:
+            Server:
+              type: string
+              default: Werkzeug/2.1.2 Python/3.10.5
+            Date:
+              type: string
+              default: Sun, 12 Jun 2022 21:05:23 GMT
+            Content-Length:
+              type: string
+              default: '55'
+            mimetype:
+              type: string
+              default: application/json
+            Connection:
+              type: string
+              default: close
+  /joke/save:
+    post:
+      summary: Save Joke
+      tags:
+      - Misc
+      operationId: SaveJoke
+      deprecated: false
+      produces:
+      - text/html; charset=utf-8
+      consumes:
+      - application/json
+      parameters:
+      - name: Content-Type
+        in: header
+        required: false
+        enum:
+        - application/json
+        type: string
+        description: ''
+      - name: Accept
+        in: header
+        required: true
+        type: string
+        description: ''
+      - name: Body
+        in: body
+        required: true
+        description: ''
+        schema:
+          $ref: '#/definitions/SaveJokeRequest'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/200ok1'
+          examples:
+            text/html; charset=utf-8:
+              data:
+                joke_new: A red and a blue ship have just collided in the Caribbean. Apparently the survivors are marooned.
+                joke_old: null
+                uid: cd1ecc30-ea93-11ec-b5da-0242ac130004
+                created_at: 2022/06/12, 21:08:26
+                updated_at: null
+                deleted_at: null
+              status: 200
+              msg: joke save
+          headers:
+            Server:
+              type: string
+              default: Werkzeug/2.1.2 Python/3.10.5
+            Date:
+              type: string
+              default: Sun, 12 Jun 2022 21:08:26 GMT
+            Content-Length:
+              type: string
+              default: '301'
+            mimetype:
+              type: string
+              default: application/json
+            Connection:
+              type: string
+              default: close
+        '500':
+          description: INTERNAL SERVER ERROR
+          schema:
+            $ref: '#/definitions/errorjoke_newempty1'
+          examples:
+            text/html; charset=utf-8:
+              data: null
+              status: 500
+              msg: The field Joke is required
+          headers:
+            Server:
+              type: string
+              default: Werkzeug/2.1.2 Python/3.10.5
+            Date:
+              type: string
+              default: Sun, 12 Jun 2022 21:08:49 GMT
+            Content-Length:
+              type: string
+              default: '66'
+            mimetype:
+              type: string
+              default: application/json
+            Connection:
+              type: string
+              default: close
+  /joke/update:
+    put:
+      summary: Update Joke
+      tags:
+      - Misc
+      operationId: UpdateJoke
+      deprecated: false
+      produces:
+      - text/html; charset=utf-8
+      consumes:
+      - application/json
+      parameters:
+      - name: Content-Type
+        in: header
+        required: false
+        enum:
+        - application/json
+        type: string
+        description: ''
+      - name: Accept
+        in: header
+        required: true
+        type: string
+        description: ''
+      - name: Body
+        in: body
+        required: true
+        description: ''
+        schema:
+          $ref: '#/definitions/UpdateJokeRequest'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/UpdateJoke'
+          examples:
+            text/html; charset=utf-8:
+              data:
+                joke_new: A red and a blue ship have just collided in the Caribbean. Apparently the survivors are marooned. UPDATED
+                joke_old: update a 2 1 knows karate? A pork chop!
+                uid: 0c0a70d6-ea8d-11ec-bfa7-0242ac130004
+                created_at: 2022/06/12, 20:20:05
+                updated_at: 2022/06/12, 21:09:24
+                deleted_at: null
+              status: 200
+              msg: joke update
+          headers:
+            Server:
+              type: string
+              default: Werkzeug/2.1.2 Python/3.10.5
+            Date:
+              type: string
+              default: Sun, 12 Jun 2022 21:09:24 GMT
+            Content-Length:
+              type: string
+              default: '366'
+            mimetype:
+              type: string
+              default: application/json
+            Connection:
+              type: string
+              default: close
+        '500':
+          description: INTERNAL SERVER ERROR
+          schema:
+            $ref: '#/definitions/Errorjokenewempty3'
+          examples:
+            text/html; charset=utf-8:
+              data: null
+              status: 500
+              msg: The field Joke is required
+          headers:
+            Server:
+              type: string
+              default: Werkzeug/2.1.2 Python/3.10.5
+            Date:
+              type: string
+              default: Sun, 12 Jun 2022 21:09:51 GMT
+            Content-Length:
+              type: string
+              default: '66'
+            mimetype:
+              type: string
+              default: application/json
+            Connection:
+              type: string
+              default: close
+        '404':
+          description: NOT FOUND
+          schema:
+            $ref: '#/definitions/Errorjokenotfound1'
+          examples:
+            text/html; charset=utf-8:
+              data: null
+              status: 404
+              msg: Joke Not Found
+          headers:
+            Server:
+              type: string
+              default: Werkzeug/2.1.2 Python/3.10.5
+            Date:
+              type: string
+              default: Sun, 12 Jun 2022 21:10:44 GMT
+            Content-Length:
+              type: string
+              default: '54'
+            mimetype:
+              type: string
+              default: application/json
+            Connection:
+              type: string
+              default: close
+  /joke/delete:
+    delete:
+      summary: Delete Joke
+      tags:
+      - Misc
+      operationId: DeleteJoke
+      deprecated: false
+      produces:
+      - text/html; charset=utf-8
+      consumes:
+      - application/json
+      parameters:
+      - name: Content-Type
+        in: header
+        required: false
+        enum:
+        - application/json
+        type: string
+        description: ''
+      - name: Accept
+        in: header
+        required: true
+        type: string
+        description: ''
+      - name: Body
+        in: body
+        required: true
+        description: ''
+        schema:
+          $ref: '#/definitions/DeleteJokeRequest'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/200ok'
+          examples:
+            text/html; charset=utf-8:
+              data: Delete success
+              status: 200
+              msg: joke Delete
+          headers:
+            Server:
+              type: string
+              default: Werkzeug/2.1.2 Python/3.10.5
+            Date:
+              type: string
+              default: Sun, 12 Jun 2022 17:50:14 GMT
+            Content-Length:
+              type: string
+              default: '63'
+            mimetype:
+              type: string
+              default: application/json
+            Connection:
+              type: string
+              default: close
+        '404':
+          description: NOT FOUND
+          schema:
+            $ref: '#/definitions/ErrorJokenotfond1'
+          examples:
+            text/html; charset=utf-8:
+              data: null
+              status: 404
+              msg: Joke Not Found
+          headers:
+            Server:
+              type: string
+              default: Werkzeug/2.1.2 Python/3.10.5
+            Date:
+              type: string
+              default: Sun, 12 Jun 2022 21:11:49 GMT
+            Content-Length:
+              type: string
+              default: '54'
+            mimetype:
+              type: string
+              default: application/json
+            Connection:
+              type: string
+              default: close
+  /joke/all:
+    get:
+      summary: All Joke
+      tags:
+      - Misc
+      operationId: AllJoke
+      deprecated: false
+      produces:
+      - text/html; charset=utf-8
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/200ok3'
+          examples:
+            text/html; charset=utf-8:
+              data:
+              - joke_new: What do you call a pig that knows karate? A pork asd!
+                joke_old: null
+                uid: 09eed724-ea8d-11ec-af04-0242ac130004
+                created_at: 2022/06/12, 20:20:01
+                updated_at: null
+                deleted_at: null
+              - joke_new: A red and a blue ship have just collided in the Caribbean. Apparently the survivors are marooned. UPDATED
+                joke_old: update a 2 1 knows karate? A pork chop!
+                uid: 0c0a70d6-ea8d-11ec-bfa7-0242ac130004
+                created_at: 2022/06/12, 20:20:05
+                updated_at: 2022/06/12, 21:09:24
+                deleted_at: null
+              - joke_new: What do you call a pig that knows karate? A pork chop!
+                joke_old: null
+                uid: 535b1f92-e9e0-11ec-921e-0242ac130004
+                created_at: 2022/06/11, 23:43:42
+                updated_at: null
+                deleted_at: null
+              - joke_new: update a 2 1 knows karate? A pork chop!
+                joke_old: update a 2 that knows karate? A pork chop!
+                uid: 67c38b18-e9e0-11ec-9237-0242ac130004
+                created_at: 2022/06/11, 23:44:16
+                updated_at: 2022/06/12, 17:40:48
+                deleted_at: null
+              - joke_new: What do you call a pig that knows karate? A pork chop!
+                joke_old: null
+                uid: 71c071a8-e9e0-11ec-a6ba-0242ac130004
+                created_at: 2022/06/11, 23:44:33
+                updated_at: null
+                deleted_at: null
+              - joke_new: What do you call a pig that knows karate? A pork chop!
+                joke_old: null
+                uid: 853c4964-e9e0-11ec-a3a2-0242ac130004
+                created_at: 2022/06/11, 23:45:05
+                updated_at: null
+                deleted_at: null
+              - joke_new: A red and a blue ship have just collided in the Caribbean. Apparently the survivors are marooned.
+                joke_old: null
+                uid: cd1ecc30-ea93-11ec-b5da-0242ac130004
+                created_at: 2022/06/12, 21:08:26
+                updated_at: null
+                deleted_at: null
+              - joke_new: What do you call a pig that knows karate? A pork asd!
+                joke_old: null
+                uid: eec2c5d6-ea8d-11ec-8e04-0242ac130004
+                created_at: 2022/06/12, 20:26:25
+                updated_at: null
+                deleted_at: null
+              - joke_new: What do you call a pig that knows karate? A pork asd!
+                joke_old: null
+                uid: f08438ce-ea8c-11ec-9380-0242ac130004
+                created_at: 2022/06/12, 20:19:19
+                updated_at: null
+                deleted_at: null
+              - joke_new: ''
+                joke_old: null
+                uid: f5180834-ea8c-11ec-b466-0242ac130004
+                created_at: 2022/06/12, 20:19:26
+                updated_at: null
+                deleted_at: null
+              status: 200
+              msg: joke all
+          headers:
+            Server:
+              type: string
+              default: Werkzeug/2.1.2 Python/3.10.5
+            Date:
+              type: string
+              default: Sun, 12 Jun 2022 21:12:50 GMT
+            Content-Length:
+              type: string
+              default: '2329'
+            mimetype:
+              type: string
+              default: application/json
+            Connection:
+              type: string
+              default: close
+  /joke/find:
+    get:
+      summary: Find Joke
+      tags:
+      - Misc
+      operationId: FindJoke
+      deprecated: false
+      produces:
+      - text/html; charset=utf-8
+      parameters:
+      - name: number
+        in: query
+        required: true
+        type: string
+        description: ''
+      responses:
+        '404':
+          description: NOT FOUND
+          schema:
+            $ref: '#/definitions/Errorjokenotfound1'
+          examples:
+            text/html; charset=utf-8:
+              data: null
+              status: 404
+              msg: Joke Not Found
+          headers:
+            Server:
+              type: string
+              default: Werkzeug/2.1.2 Python/3.10.5
+            Date:
+              type: string
+              default: Sun, 12 Jun 2022 21:13:19 GMT
+            Content-Length:
+              type: string
+              default: '54'
+            mimetype:
+              type: string
+              default: application/json
+            Connection:
+              type: string
+              default: close
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/200ok1'
+          examples:
+            text/html; charset=utf-8:
+              data:
+                joke_new: What do you call a pig that knows karate? A pork asd!
+                joke_old: null
+                uid: 09eed724-ea8d-11ec-af04-0242ac130004
+                created_at: 2022/06/12, 20:20:01
+                updated_at: null
+                deleted_at: null
+              status: 200
+              msg: joke find
+          headers:
+            Server:
+              type: string
+              default: Werkzeug/2.1.2 Python/3.10.5
+            Date:
+              type: string
+              default: Sun, 12 Jun 2022 21:13:46 GMT
+            Content-Length:
+              type: string
+              default: '257'
+            mimetype:
+              type: string
+              default: application/json
+            Connection:
+              type: string
+              default: close
+definitions:
+  200ok:
+    title: 200ok
+    example:
+      data: Chuck Norris doesn't give you the willies. He simply gives you The Willy.
+      status: 200
+      msg: joke search
+    type: object
+    properties:
+      data:
+        type: string
+      status:
+        type: integer
+        format: int32
+      msg:
+        type: string
+    required:
+    - data
+    - status
+    - msg
+  paramempty1:
+    title: paramempty1
+    example:
+      data: null
+      status: 404
+      msg: Param Not Found
+    type: object
+    properties:
+      data:
+        type: string
+      status:
+        type: integer
+        format: int32
+      msg:
+        type: string
+    required:
+    - data
+    - status
+    - msg
+  200ParamChuck:
+    title: 200ParamChuck
+    example:
+      data: Chuck Norris once said 'To be or not to be, who gives a shit?' William Shakespaere stole and modified this quote, which is why he died such a violent death.
+      status: 200
+      msg: joke search
+    type: object
+    properties:
+      data:
+        type: string
+      status:
+        type: integer
+        format: int32
+      msg:
+        type: string
+    required:
+    - data
+    - status
+    - msg
+  200ParamDad:
+    title: 200ParamDad
+    example:
+      data: What did one plate say to the other plate? Dinner is on me!
+      status: 200
+      msg: joke search
+    type: object
+    properties:
+      data:
+        type: string
+      status:
+        type: integer
+        format: int32
+      msg:
+        type: string
+    required:
+    - data
+    - status
+    - msg
+  SeachRamdon1:
+    title: SeachRamdon1
+    example:
+      data: null
+      status: 404
+      msg: Ramdon Not Found
+    type: object
+    properties:
+      data:
+        type: string
+      status:
+        type: integer
+        format: int32
+      msg:
+        type: string
+    required:
+    - data
+    - status
+    - msg
+  SaveJokeRequest:
+    title: SaveJokeRequest
+    example:
+      joke_new: A red and a blue ship have just collided in the Caribbean. Apparently the survivors are marooned.
+    type: object
+    properties:
+      joke_new:
+        type: string
+    required:
+    - joke_new
+  200ok1:
+    title: 200ok1
+    example:
+      data:
+        joke_new: A red and a blue ship have just collided in the Caribbean. Apparently the survivors are marooned.
+        joke_old: null
+        uid: cd1ecc30-ea93-11ec-b5da-0242ac130004
+        created_at: 2022/06/12, 21:08:26
+        updated_at: null
+        deleted_at: null
+      status: 200
+      msg: joke save
+    type: object
+    properties:
+      data:
+        $ref: '#/definitions/Data'
+      status:
+        type: integer
+        format: int32
+      msg:
+        type: string
+    required:
+    - data
+    - status
+    - msg
+  Data:
+    title: Data
+    example:
+      joke_new: A red and a blue ship have just collided in the Caribbean. Apparently the survivors are marooned.
+      joke_old: null
+      uid: cd1ecc30-ea93-11ec-b5da-0242ac130004
+      created_at: 2022/06/12, 21:08:26
+      updated_at: null
+      deleted_at: null
+    type: object
+    properties:
+      joke_new:
+        type: string
+      joke_old:
+        type: string
+      uid:
+        type: string
+      created_at:
+        type: string
+      updated_at:
+        type: string
+      deleted_at:
+        type: string
+    required:
+    - joke_new
+    - joke_old
+    - uid
+    - created_at
+    - updated_at
+    - deleted_at
+  errorjoke_newempty1:
+    title: errorjoke_newempty1
+    example:
+      data: null
+      status: 500
+      msg: The field Joke is required
+    type: object
+    properties:
+      data:
+        type: string
+      status:
+        type: integer
+        format: int32
+      msg:
+        type: string
+    required:
+    - data
+    - status
+    - msg
+  UpdateJokeRequest:
+    title: UpdateJokeRequest
+    example:
+      number: 0c0a70d6-ea8d-11ec-bfa7-0242ac130004
+      joke_new: A red and a blue ship have just collided in the Caribbean. Apparently the survivors are marooned. UPDATED
+    type: object
+    properties:
+      number:
+        type: string
+      joke_new:
+        type: string
+    required:
+    - number
+    - joke_new
+  UpdateJoke:
+    title: UpdateJoke
+    example:
+      data:
+        joke_new: A red and a blue ship have just collided in the Caribbean. Apparently the survivors are marooned. UPDATED
+        joke_old: update a 2 1 knows karate? A pork chop!
+        uid: 0c0a70d6-ea8d-11ec-bfa7-0242ac130004
+        created_at: 2022/06/12, 20:20:05
+        updated_at: 2022/06/12, 21:09:24
+        deleted_at: null
+      status: 200
+      msg: joke update
+    type: object
+    properties:
+      data:
+        $ref: '#/definitions/Data1'
+      status:
+        type: integer
+        format: int32
+      msg:
+        type: string
+    required:
+    - data
+    - status
+    - msg
+  Data1:
+    title: Data1
+    example:
+      joke_new: A red and a blue ship have just collided in the Caribbean. Apparently the survivors are marooned. UPDATED
+      joke_old: update a 2 1 knows karate? A pork chop!
+      uid: 0c0a70d6-ea8d-11ec-bfa7-0242ac130004
+      created_at: 2022/06/12, 20:20:05
+      updated_at: 2022/06/12, 21:09:24
+      deleted_at: null
+    type: object
+    properties:
+      joke_new:
+        type: string
+      joke_old:
+        type: string
+      uid:
+        type: string
+      created_at:
+        type: string
+      updated_at:
+        type: string
+      deleted_at:
+        type: string
+    required:
+    - joke_new
+    - joke_old
+    - uid
+    - created_at
+    - updated_at
+    - deleted_at
+  Errorjokenewempty3:
+    title: Errorjokenewempty3
+    example:
+      data: null
+      status: 500
+      msg: The field Joke is required
+    type: object
+    properties:
+      data:
+        type: string
+      status:
+        type: integer
+        format: int32
+      msg:
+        type: string
+    required:
+    - data
+    - status
+    - msg
+  Errorjokenotfound1:
+    title: Errorjokenotfound1
+    example:
+      data: null
+      status: 404
+      msg: Joke Not Found
+    type: object
+    properties:
+      data:
+        type: string
+      status:
+        type: integer
+        format: int32
+      msg:
+        type: string
+    required:
+    - data
+    - status
+    - msg
+  DeleteJokeRequest:
+    title: DeleteJokeRequest
+    example:
+      number: fd50954e-ea77-11ec-b108-0242ac130004
+    type: object
+    properties:
+      number:
+        type: string
+    required:
+    - number
+  ErrorJokenotfond1:
+    title: ErrorJokenotfond1
+    example:
+      data: null
+      status: 404
+      msg: Joke Not Found
+    type: object
+    properties:
+      data:
+        type: string
+      status:
+        type: integer
+        format: int32
+      msg:
+        type: string
+    required:
+    - data
+    - status
+    - msg
+  200ok3:
+    title: 200ok3
+    example:
+      data:
+      - joke_new: What do you call a pig that knows karate? A pork asd!
+        joke_old: null
+        uid: 09eed724-ea8d-11ec-af04-0242ac130004
+        created_at: 2022/06/12, 20:20:01
+        updated_at: null
+        deleted_at: null
+      - joke_new: A red and a blue ship have just collided in the Caribbean. Apparently the survivors are marooned. UPDATED
+        joke_old: update a 2 1 knows karate? A pork chop!
+        uid: 0c0a70d6-ea8d-11ec-bfa7-0242ac130004
+        created_at: 2022/06/12, 20:20:05
+        updated_at: 2022/06/12, 21:09:24
+        deleted_at: null
+      - joke_new: What do you call a pig that knows karate? A pork chop!
+        joke_old: null
+        uid: 535b1f92-e9e0-11ec-921e-0242ac130004
+        created_at: 2022/06/11, 23:43:42
+        updated_at: null
+        deleted_at: null
+      - joke_new: update a 2 1 knows karate? A pork chop!
+        joke_old: update a 2 that knows karate? A pork chop!
+        uid: 67c38b18-e9e0-11ec-9237-0242ac130004
+        created_at: 2022/06/11, 23:44:16
+        updated_at: 2022/06/12, 17:40:48
+        deleted_at: null
+      - joke_new: What do you call a pig that knows karate? A pork chop!
+        joke_old: null
+        uid: 71c071a8-e9e0-11ec-a6ba-0242ac130004
+        created_at: 2022/06/11, 23:44:33
+        updated_at: null
+        deleted_at: null
+      - joke_new: What do you call a pig that knows karate? A pork chop!
+        joke_old: null
+        uid: 853c4964-e9e0-11ec-a3a2-0242ac130004
+        created_at: 2022/06/11, 23:45:05
+        updated_at: null
+        deleted_at: null
+      - joke_new: A red and a blue ship have just collided in the Caribbean. Apparently the survivors are marooned.
+        joke_old: null
+        uid: cd1ecc30-ea93-11ec-b5da-0242ac130004
+        created_at: 2022/06/12, 21:08:26
+        updated_at: null
+        deleted_at: null
+      - joke_new: What do you call a pig that knows karate? A pork asd!
+        joke_old: null
+        uid: eec2c5d6-ea8d-11ec-8e04-0242ac130004
+        created_at: 2022/06/12, 20:26:25
+        updated_at: null
+        deleted_at: null
+      - joke_new: What do you call a pig that knows karate? A pork asd!
+        joke_old: null
+        uid: f08438ce-ea8c-11ec-9380-0242ac130004
+        created_at: 2022/06/12, 20:19:19
+        updated_at: null
+        deleted_at: null
+      - joke_new: ''
+        joke_old: null
+        uid: f5180834-ea8c-11ec-b466-0242ac130004
+        created_at: 2022/06/12, 20:19:26
+        updated_at: null
+        deleted_at: null
+      status: 200
+      msg: joke all
+    type: object
+    properties:
+      data:
+        type: array
+        items:
+          $ref: '#/definitions/Data'
+      status:
+        type: integer
+        format: int32
+      msg:
+        type: string
+    required:
+    - data
+    - status
+    - msg
+tags:
+- name: Misc
+  description: ''

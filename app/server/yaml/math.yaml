@@ -1,0 +1,155 @@
+swagger: '2.0'
+info:
+  version: '1.0'
+  title: Math
+  contact: {}
+host: localhost
+basePath: /
+securityDefinitions: {}
+schemes:
+- http
+consumes:
+- application/json
+produces:
+- application/json
+paths:
+  /math:
+    get:
+      summary: Math Module
+      tags:
+      - Misc
+      operationId: MathModule
+      deprecated: false
+      produces:
+      - text/html; charset=utf-8
+      parameters:
+      - name: numbers
+        in: query
+        type: array
+        items:
+          type: integer
+          format: int32
+        description: ''
+      - name: number
+        in: query
+        type: integer
+        items:
+          type: integer
+          format: int32
+        description: ''
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/200ok'
+          examples:
+            text/html; charset=utf-8:
+              - data: greatest common multiple of [7,354,24,9] is :29736
+                status: 200
+                msg: math
+              - data: 'the sum 123 + 1 is : 124'
+                status: 200
+                msg: math
+            
+          headers:
+            Server:
+              type: string
+              default: Werkzeug/2.1.2 Python/3.10.5
+            Date:
+              type: string
+              default: Sun, 12 Jun 2022 20:35:07 GMT
+            Content-Length:
+              type: string
+              default: '92'
+            mimetype:
+              type: string
+              default: application/json
+            Connection:
+              type: string
+              default: close
+        '406':
+          description: NOT ACCEPTABLE
+          schema:
+            $ref: '#/definitions/ErrorFloatformatError1'
+          examples:
+            text/html; charset=utf-8:
+              data: null
+              status: 406
+              msg: "Error: value isn't type int"
+          headers:
+            Server:
+              type: string
+              default: Werkzeug/2.1.2 Python/3.10.5
+            Date:
+              type: string
+              default: Sun, 12 Jun 2022 21:32:26 GMT
+            Content-Length:
+              type: string
+              default: '67'
+            mimetype:
+              type: string
+              default: application/json
+            Connection:
+              type: string
+              default: close
+definitions:
+  200ok:
+    title: 200ok
+    example:
+      data: greatest common multiple of [7,354,24,9] is :29736
+      status: 200
+      msg: math
+    type: object
+    properties:
+      data:
+        type: string
+      status:
+        type: integer
+        format: int32
+      msg:
+        type: string
+    required:
+    - data
+    - status
+    - msg
+  ErrorFloatformatError1:
+    title: ErrorFloatformatError1
+    example:
+      data: null
+      status: 406
+      msg: "Error: value isn't type int"
+    type: object
+    properties:
+      data:
+        type: string
+      status:
+        type: integer
+        format: int32
+      msg:
+        type: string
+    required:
+    - data
+    - status
+    - msg
+  ErrorStrformaterror1:
+    title: ErrorStrformaterror1
+    example:
+      data: null
+      status: 406
+      msg: "Error: value isn't type int"
+    type: object
+    properties:
+      data:
+        type: string
+      status:
+        type: integer
+        format: int32
+      msg:
+        type: string
+    required:
+    - data
+    - status
+    - msg
+tags:
+- name: Misc
+  description: ''
